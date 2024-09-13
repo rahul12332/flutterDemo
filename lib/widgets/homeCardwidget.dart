@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:demo/constants/app_color.dart';
 import 'package:demo/features/detailScreen/detailScreen.dart';
+import 'package:demo/widgets/clockTimerwidget.dart';
 import 'package:flutter/material.dart';
 import 'package:demo/features/Home/model/homemodel.dart';
 
@@ -17,26 +18,9 @@ class HomeCardWidget extends StatefulWidget {
 class _HomeCardWidgetState extends State<HomeCardWidget> {
   int _hoveredIndex = -1;
   Map<int, bool> _markRead = {}; // to store the boolean value according to the size of userList
-  int _start = 0;
-  Timer? _timer;
-  @override
-  void initState() {
-    super.initState();
-    _startTimer();
-  }
 
-  void _startTimer() {
-    _timer = Timer.periodic(Duration(seconds: 1), (Timer timer) {
 
-      if (_start < 25) {
-        setState(() {
-          _start++;
-        });
-      } else {
-        timer.cancel();
-      }
-    });
-  }
+
   Widget build(BuildContext context) {
     return CustomScrollView(
       scrollDirection: Axis.vertical,
@@ -94,16 +78,7 @@ class _HomeCardWidgetState extends State<HomeCardWidget> {
                           Positioned(
                             right: 10,
                             top: 10,
-                            child: Container(
-                              alignment: Alignment.center,
-                              height: 40,
-                              width: 40,
-                              decoration: BoxDecoration(
-                                border: Border.all(color: AppColors.primaryColor, width: 2),
-                                borderRadius: BorderRadius.circular(25)
-                              ),
-                              child: Text(_start.toString(), style: TextStyle(color: Colors.white),),
-                            ),
+                            child: ClockTimerWidget()
                           ),
                         ],
                       ),
